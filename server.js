@@ -16,9 +16,16 @@ app.get('/events', (req, res) => {
   req.on('close', () => clients.delete(res));
 });
 
-app.post('/update', (req, res) => {
+app.post('/training', (req, res) => {
   for (const client of clients) {
-    client.write(`data: ${JSON.stringify(req.body)}\n\n`);
+    client.write(`data: ${JSON.stringify({ state: 'training', model: req.body.model })}\n\n`);
+  }
+  res.sendStatus(200);
+});
+
+app.post('/complete', (req, res) => {
+  for (const client of clients) {
+    client.write(`data: ${JSON.stringify({ state: 'complete', model: req.body.model, url: req.body.url })}\n\n`);
   }
   res.sendStatus(200);
 });
