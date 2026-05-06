@@ -1,0 +1,34 @@
+<div id='inkwell-banner' style='background: linear-gradient(145deg, #0f0f11, #1a1a1c); border: 1px solid #2d2d30; border-radius: 24px; padding: 24px; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; color: #e0e0e2; box-shadow: 0 20px 40px rgba(0,0,0,0.5), inset 0 1px 1px rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; max-width: 800px; gap: 20px; position: relative; overflow: hidden;'>
+  <div style='position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at top left, rgba(255,255,255,0.03) 0%, transparent 50%); pointer-events: none;'></div>
+  <div style='display: flex; flex-direction: column; gap: 4px; position: relative;'>
+    <div style='display: flex; align-items: center; gap: 8px;'>
+      <div id='status-dot' style='width: 8px; height: 8px; border-radius: 50%; background: #ff9500; box-shadow: 0 0 10px #ff9500; animation: pulse 1.5s infinite ease-in-out;'></div>
+      <span id='banner-engine' style='text-transform: uppercase; font-size: 10px; letter-spacing: 0.1em; color: #88888b; font-weight: 700;'></span>
+    </div>
+    <h2 id='banner-title' style='margin: 0; font-size: 18px; font-weight: 500; color: #fff;'></h2>
+  </div>
+  <div style='display: flex; gap: 32px;'>
+    <div style='text-align: right;'>
+      <div style='font-size: 10px; color: #555558; text-transform: uppercase;'>Architecture</div>
+      <div id='banner-architecture' style='font-size: 14px; font-weight: 600; color: #a1a1a6;'></div>
+    </div>
+    <div style='text-align: right;'>
+      <div style='font-size: 10px; color: #555558; text-transform: uppercase;'>Precision</div>
+      <div id='banner-precision' style='font-size: 14px; font-weight: 600; color: #a1a1a6;'></div>
+    </div>
+  </div>
+  <style>
+    @keyframes pulse { 0% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(1.1); } 100% { opacity: 1; transform: scale(1); } }
+    .complete #status-dot { background: #34c759 !important; box-shadow: 0 0 10px #34c759 !important; animation: none !important; }
+    .complete #banner-title::after { content: ' - Complete'; color: #34c759; }
+  </style>
+  <script>
+    function updateBanner(data) {
+      if (data.engine)       document.getElementById('banner-engine').textContent       = data.engine;
+      if (data.title)        document.getElementById('banner-title').textContent        = data.title;
+      if (data.architecture) document.getElementById('banner-architecture').textContent = data.architecture;
+      if (data.precision)    document.getElementById('banner-precision').textContent    = data.precision;
+      if (data.complete)     document.getElementById('inkwell-banner').classList.add('complete');
+    }
+  </script>
+</div>
